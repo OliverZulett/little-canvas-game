@@ -1,20 +1,133 @@
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Little Canvas Game</title>
+    <meta
+      name="description"
+      content="A fun canvas game where you control a square to consume colorful spheres. Challenge yourself with a 2-minute timer!"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Canvas</title>
-	<style>
-		#canvas {
-			border: 1px solid #aaaa;
-		}
-	</style>
-</head>
+  <body>
+    <!-- Decorative Background -->
+    <div class="bg-sphere bg-sphere-1"></div>
+    <div class="bg-sphere bg-sphere-2"></div>
+    <div class="bg-sphere bg-sphere-3"></div>
 
-<body>
-	<canvas id="canvas" width="800" height="400"></canvas>
-	<script src="./main.js"></script>
-</body>
+    <!-- ── Start Modal ── -->
+    <div id="start-modal" class="modal-overlay">
+      <div class="modal-card">
+        <span class="modal-emoji">🎮</span>
+        <h2>Little Canvas Game</h2>
+        <p>
+          Controla el cuadrado con las flechas del teclado y consume todas las
+          esferas antes de que se acabe el tiempo. ¡Tienes 2 minutos!
+        </p>
+        <!-- Theme Picker -->
+        <div class="theme-picker">
+          <div class="theme-picker-label">Elige tu tema</div>
+          <div class="theme-swatches">
+            <div class="theme-swatch active" data-theme="nebula" title="Nebula">
+              <span class="theme-swatch-name">Nebula</span>
+            </div>
+            <div class="theme-swatch" data-theme="cyber" title="Cyber">
+              <span class="theme-swatch-name">Cyber</span>
+            </div>
+            <div class="theme-swatch" data-theme="sunset" title="Sunset">
+              <span class="theme-swatch-name">Sunset</span>
+            </div>
+            <div class="theme-swatch" data-theme="forest" title="Forest">
+              <span class="theme-swatch-name">Forest</span>
+            </div>
+            <div class="theme-swatch" data-theme="frost" title="Frost">
+              <span class="theme-swatch-name">Frost</span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group">
+          <input
+            type="text"
+            id="player-name-input"
+            placeholder="Escribe tu nombre..."
+            maxlength="20"
+            autocomplete="off"
+          />
+        </div>
+        <button id="start-btn" class="btn-primary" disabled>
+          Comenzar Juego
+        </button>
+        <!-- Author Credit -->
+        <div class="author-credit">
+          Desarrollado por <a href="https://github.com/OliverZulett" target="_blank" rel="noopener noreferrer">Oliver Zulett</a>
+        </div>
+      </div>
+    </div>
 
+    <!-- ── Game Over Modal ── -->
+    <div id="gameover-modal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <span class="modal-emoji">⏱️</span>
+        <h2>¡Tiempo Agotado!</h2>
+        <div class="player-name-display" id="gameover-name"></div>
+        <div class="score-display" id="gameover-score">0</div>
+        <div class="score-label">Puntos obtenidos</div>
+        <div class="player-name-display" style="margin-bottom: 24px">
+          Nivel alcanzado: <span id="gameover-level">1</span>
+        </div>
+        <button id="restart-btn" class="btn-primary">Jugar de Nuevo</button>
+      </div>
+    </div>
+
+    <!-- ── HUD ── -->
+    <div id="hud">
+      <div class="hud-item">
+        <span class="hud-icon">👤</span>
+        <div>
+          <div class="hud-label">Jugador</div>
+          <div class="hud-value" id="hud-name">—</div>
+        </div>
+      </div>
+      <div class="hud-item">
+        <span class="hud-icon">⭐</span>
+        <div>
+          <div class="hud-label">Puntuación</div>
+          <div class="hud-value" id="hud-score">0</div>
+        </div>
+      </div>
+      <div class="hud-item">
+        <span class="hud-icon">🚀</span>
+        <div>
+          <div class="hud-label">Nivel</div>
+          <div class="hud-value" id="hud-level">1</div>
+        </div>
+      </div>
+      <div class="hud-item">
+        <span class="hud-icon">⏱️</span>
+        <div>
+          <div class="hud-label">Tiempo</div>
+          <div class="hud-value" id="timer-value">2:00.000</div>
+        </div>
+      </div>
+      <button id="theme-toggle-btn" title="Cambiar tema">
+        <span class="theme-dot"></span>
+        <span id="theme-toggle-label">Tema</span>
+      </button>
+    </div>
+
+    <!-- ── Canvas ── -->
+    <div id="canvas-wrapper">
+      <canvas id="canvas" width="800" height="400"></canvas>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
 </html>
